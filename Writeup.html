@@ -130,8 +130,7 @@ test = data[testIndex,]</code></pre>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
 <pre class="r"><code>testPred = predict(predictor, newdata = test)</code></pre>
-<p>accurancy = confusionMatrix(testPred<span class="math">\(classe, testPred)\)</span>overall[1]</p>
-<p>It can be concluded that the algorithm’s accurancy is equal to 98.43% and the out-of-sample error is 1.56%.</p>
+<p><code>{cs} accurancy = confusionMatrix(testPred$classe, testPred)$overall[1]</code> It can be concluded that the algorithm’s accurancy is equal to 98.43% and the out-of-sample error is 1.57%.</p>
 </div>
 </div>
 
