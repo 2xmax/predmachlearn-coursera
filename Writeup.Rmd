@@ -1,0 +1,63 @@
+---
+title: "Writeup"
+output: html_document
+---
+
+This paper deals with prediction of human acrtivities based on collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
+
+Initization of environment
+===============================
+Let us load these packages
+```{r}
+library(dplyr)
+library(caret)
+library(randomForest)
+```
+
+And set some seed to make my expirement reproduceble
+
+```{r}
+set.seed(42)
+```
+
+Obtaining and preprocessing data
+===============================
+
+```{r}
+if (!file.exists("pml-training.csv")){
+  download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", destfile = "pml-training.csv", method="curl")  
+}
+
+raw <- read.csv("pml-training.csv", na.strings = c("NA",""), stringsAsFactors = FALSE)
+
+cleanupData = function(raw){  
+  cleaned <- subset(raw, select = -c(X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp, new_window, num_window))  
+  cleaned <- cleaned[, colSums(is.na(training) | training == "") == 0]
+  cleaned
+}
+
+data = cleanupData(raw)
+```
+
+Feature selection and prediction
+=============================
+
+```{r}
+data$classe <- as.factor(data$classe)  
+
+testIndex = createDataPartition(data$classe, p = 0.7,list=FALSE)
+train = data[-testIndex,]
+test = data[testIndex,]
+
+predictor <- randomForest(classe ~ ., data = train)
+```
+
+
+Analysis
+=============================
+
+```{r}
+accurancy = confusionMatrix(crossValidation$classe, testPred)$overall[1]
+```
+
+returns 0.9843488, that's great TBD
