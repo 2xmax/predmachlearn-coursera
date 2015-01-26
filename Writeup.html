@@ -69,7 +69,7 @@ img {
 </div>
 <div id="environment-initialization" class="section level2">
 <h2>Environment initialization</h2>
-<p>Let us load these packages</p>
+<p>Let us load the following packages:</p>
 <pre class="r"><code>library(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: 'dplyr'
@@ -129,8 +129,9 @@ test = data[testIndex,]</code></pre>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
-<pre class="r"><code>testPred = predict(predictor, newdata = test)</code></pre>
-<p><code>{cs} accurancy = confusionMatrix(testPred$classe, testPred)$overall[1]</code> It can be concluded that the algorithm’s accurancy is equal to 98.43% and the out-of-sample error is 1.57%.</p>
+<pre class="r"><code>testPred = predict(predictor, newdata = test)
+accurancy = confusionMatrix(test$classe, testPred)$overall[1]</code></pre>
+<p>It can be concluded that the algorithm’s accurancy is equal to 98.37% and the out-of-sample error is 1.63%.</p>
 </div>
 </div>
 
