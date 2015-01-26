@@ -102,7 +102,7 @@ img {
   download.file(&quot;https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv&quot;, destfile = &quot;pml-training.csv&quot;, method=&quot;curl&quot;)  
 }
 
-# remove na and empty values from dataset
+# remove N/A's and empty values from dataset
 raw &lt;- read.csv(&quot;pml-training.csv&quot;, na.strings = c(&quot;NA&quot;,&quot;&quot;), stringsAsFactors = FALSE)</code></pre>
 <p>The original dataset have a lot of noise, let us clean it.</p>
 <pre class="r"><code>cleanupData = function(raw){
@@ -118,14 +118,13 @@ data = cleanupData(raw)</code></pre>
 </div>
 <div id="prediction" class="section level2">
 <h2>Prediction</h2>
-<p>Let us split train and test crossvalidation set in typical proportion, let us say, in 70%/30%.</p>
+<p>Let us split train and test crossvalidation sets in typical proportion, let us say, in 70%/30%.</p>
 <pre class="r"><code>data$classe &lt;- as.factor(data$classe)
 testIndex = createDataPartition(data$classe, p = 0.7, list=FALSE)
 train = data[-testIndex,]
 test = data[testIndex,]</code></pre>
-<p>Based on the paper’s rocommendations, we are going to use random forest classification algorithm.</p>
+<p>For best accurancy without requirement of good interpretaion the best choice will be random forests algorithm (at least among RF, GBM and SVM. Take a look at code.R for details).</p>
 <pre class="r"><code>predictor &lt;- randomForest(classe ~ ., data = train)</code></pre>
-<p>N.B.: for simplicity, single thread code has been provided. It can be run in parallel, using doParallel package (TBD: provide example).</p>
 </div>
 <div id="conclusion" class="section level2">
 <h2>Conclusion</h2>
