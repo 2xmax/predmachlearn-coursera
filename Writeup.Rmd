@@ -40,7 +40,7 @@ The original dataset have a lot of noise, let us clean it.
 cleanupData = function(raw){
   # remove unrelated fields from model
   cleaned <- subset(raw, select = -c(X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp, new_window, num_window))
-  # there are a lot of columns with missing data, throm them up
+  # there are a lot of columns with missing data, throw them up
   naThreshold = as.integer(nrow(raw) * 0.5)
   cleaned <- subset(cleaned, select = -which(colSums(is.na(cleaned)) > naThreshold))
   cleaned
