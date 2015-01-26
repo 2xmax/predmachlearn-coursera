@@ -28,13 +28,12 @@ if (!file.exists("pml-training.csv")){
   download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", destfile = "pml-training.csv", method="curl")  
 }
 
+# remove na and empty values from dataset
 raw <- read.csv("pml-training.csv", na.strings = c("NA",""), stringsAsFactors = FALSE)
 
 cleanupData = function(raw){
   # remove unrelated fields from model
   cleaned <- subset(raw, select = -c(X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp, new_window, num_window))
-  # remove na and empty values from dataset
-  cleaned <- cleaned[, colSums(is.na(training) | training == "") == 0]
   cleaned
 }
 
@@ -54,10 +53,12 @@ test = data[testIndex,]
 
 ```
 
-And choose random forest prediction (It can be run in parallel, using doParallel package).
+Based on the paper's rocommendations, we are going to use random forest classification algorithm.
 ```{r}
 predictor <- randomForest(classe ~ ., data = train)
 ```
+
+N.B.: for simplicity, single thread code has been provided. It can be run in parallel, using doParallel package (TBD: provide example).
 
 Analysis
 =============================
@@ -67,4 +68,4 @@ testPred <- predict(predictor, newdata = test)
 accurancy = confusionMatrix(crossValidation$classe, testPred)$overall[1]
 ```
 
-returns 0.9843488, that's great TBD
+So we can conclude that the algorithm's accurancy is equal to 98%.
