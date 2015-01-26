@@ -1,15 +1,13 @@
----
-title: "Writeup"
-output: html_document
----
+Human Activity Recognition
+=========================
 
 Motivation
-===============================
+------------------------------
 
 The goal of this work is to predict human activities by collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The approach of research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
 
 Environment initialization
-===============================
+------------------------------
 Let us load these packages
 ```{r}
 library(dplyr)
@@ -24,7 +22,7 @@ set.seed(42)
 ```
 
 Obtaining and preprocessing data
-===============================
+------------------------------
 
 ```{r}
 if (!file.exists("pml-training.csv")){
@@ -50,7 +48,7 @@ data = cleanupData(raw)
 ```
 
 Prediction
-=============================
+------------------------------
 
 Let us split train and test crossvalidation set in typical proportion, let us say, in 70%/30%.
 ```{r}
@@ -69,7 +67,7 @@ predictor <- randomForest(classe ~ ., data = train)
 N.B.: for simplicity, single thread code has been provided. It can be run in parallel, using doParallel package (TBD: provide example).
 
 Conclusion
-=============================
+------------------------------
 
 ```{r}
 testPred <- predict(predictor, newdata = test)
