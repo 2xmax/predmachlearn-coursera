@@ -8,7 +8,7 @@ The goal of this work is to predict human activities by collected data using dev
 
 Environment initialization
 ------------------------------
-Let us load these packages
+Let us load the following packages:
 ```{r}
 library(dplyr)
 library(caret)
@@ -71,7 +71,7 @@ Conclusion
 
 ```{r}
 testPred = predict(predictor, newdata = test)
-accurancy = confusionMatrix(testPred$classe, testPred)$overall[1]
+accurancy = confusionMatrix(test$classe, testPred)$overall[1]
 ```
 
-It can be concluded that the algorithm's accurancy is equal to 98.43% and the out-of-sample error is 1.57%.
+It can be concluded that the algorithm's accurancy is equal to 98.37% and the out-of-sample error is 1.63%.
