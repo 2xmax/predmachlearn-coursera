@@ -22,9 +22,9 @@ data = cleanupData(raw)
 
 data$classe <- as.factor(data$classe)
 
-testIndex = createDataPartition(cleaned$classe, p = 0.7, list=FALSE)
-train = cleaned[-testIndex,]
-test = cleaned[testIndex,]
+testIndex = createDataPartition(data$classe, p = 0.7, list=FALSE)
+train = data[-testIndex,]
+test = data[testIndex,]
 
 predictor <- randomForest(classe ~ ., data = train)
 trainPred <- predict(predictor, newdata = train)
