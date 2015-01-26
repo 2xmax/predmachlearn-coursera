@@ -76,4 +76,4 @@ testPred <- predict(predictor, newdata = test)
 accurancy = confusionMatrix(testPred$classe, testPred)$overall[1]
 ```
 
-So we can conclude that the algorithm's accurancy is equal to 98%.
+It can be concluded that the algorithm's accurancy is equal to 98.43% and the out-of-sample error is 1.56%.
