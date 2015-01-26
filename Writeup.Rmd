@@ -59,7 +59,7 @@ test = data[testIndex,]
 
 ```
 
-For best accurancy without requirement of good interpretaion the best choice will be random forests algorithm (look for code.R for details).
+For best accurancy without requirement of good interpretaion the best choice will be random forests algorithm (at least among RF, GBM anf SVM. Look for code.R for details).
 ```{r}
 predictor <- randomForest(classe ~ ., data = train)
 ```
