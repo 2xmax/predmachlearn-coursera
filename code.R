@@ -22,7 +22,7 @@ data = cleanupData(raw)
 
 data$classe <- as.factor(data$classe)
 
-testIndex = createDataPartition(cleaned$classe, p = 0.7,list=FALSE)
+testIndex = createDataPartition(cleaned$classe, p = 0.7, list=FALSE)
 train = cleaned[-testIndex,]
 test = cleaned[testIndex,]
 

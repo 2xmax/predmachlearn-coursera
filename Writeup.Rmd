@@ -33,7 +33,10 @@ if (!file.exists("pml-training.csv")){
 
 # remove na and empty values from dataset
 raw <- read.csv("pml-training.csv", na.strings = c("NA",""), stringsAsFactors = FALSE)
+```
 
+The original dataset have a lot of noise, let us clean it.
+```{r}
 cleanupData = function(raw){
   # remove unrelated fields from model
   cleaned <- subset(raw, select = -c(X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp, new_window, num_window))
@@ -49,11 +52,10 @@ data = cleanupData(raw)
 Prediction
 =============================
 
-Let us split train and test crossvalidation set in proportion of 70%/30%.
+Let us split train and test crossvalidation set in typical proportion, let us say, in 70%/30%.
 ```{r}
-data$classe <- as.factor(data$classe)  
-
-testIndex = createDataPartition(data$classe, p = 0.7,list=FALSE)
+data$classe <- as.factor(data$classe)
+testIndex = createDataPartition(data$classe, p = 0.7, list=FALSE)
 train = data[-testIndex,]
 test = data[testIndex,]
 
