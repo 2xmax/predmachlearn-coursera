@@ -3,7 +3,7 @@ title: "Writeup"
 output: html_document
 ---
 
-This paper deals with prediction of human activities based on collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
+The goal of this work is to predict human activities by collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The approach of research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
 
 Environment initialization
 ===============================
@@ -30,8 +30,10 @@ if (!file.exists("pml-training.csv")){
 
 raw <- read.csv("pml-training.csv", na.strings = c("NA",""), stringsAsFactors = FALSE)
 
-cleanupData = function(raw){  
-  cleaned <- subset(raw, select = -c(X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp, new_window, num_window))  
+cleanupData = function(raw){
+  # remove unrelated fields from model
+  cleaned <- subset(raw, select = -c(X, user_name, raw_timestamp_part_1, raw_timestamp_part_2, cvtd_timestamp, new_window, num_window))
+  # remove na and empty values from dataset
   cleaned <- cleaned[, colSums(is.na(training) | training == "") == 0]
   cleaned
 }
@@ -39,9 +41,10 @@ cleanupData = function(raw){
 data = cleanupData(raw)
 ```
 
-Feature selection and prediction
+Prediction
 =============================
 
+Let us split train and test crossvalidation set in proportion of 70%/30%.
 ```{r}
 data$classe <- as.factor(data$classe)  
 
@@ -49,9 +52,12 @@ testIndex = createDataPartition(data$classe, p = 0.7,list=FALSE)
 train = data[-testIndex,]
 test = data[testIndex,]
 
-predictor <- randomForest(classe ~ ., data = train)
 ```
 
+And choose random forest prediction (It can be run in parallel, using doParallel package).
+```{r}
+predictor <- randomForest(classe ~ ., data = train)
+```
 
 Analysis
 =============================
