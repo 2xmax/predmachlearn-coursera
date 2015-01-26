@@ -3,9 +3,9 @@ title: "Writeup"
 output: html_document
 ---
 
-This paper deals with prediction of human acrtivities based on collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
+This paper deals with prediction of human activities based on collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
 
-Initization of environment
+Environment initialization
 ===============================
 Let us load these packages
 ```{r}
@@ -14,7 +14,7 @@ library(caret)
 library(randomForest)
 ```
 
-And set some seed to make my expirement reproduceble
+And set some seed to make the experiment reproducible
 
 ```{r}
 set.seed(42)
@@ -57,6 +57,7 @@ Analysis
 =============================
 
 ```{r}
+testPred <- predict(predictor, newdata = test)
 accurancy = confusionMatrix(crossValidation$classe, testPred)$overall[1]
 ```
 
