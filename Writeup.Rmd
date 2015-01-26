@@ -3,6 +3,9 @@ title: "Writeup"
 output: html_document
 ---
 
+Motivation
+===============================
+
 The goal of this work is to predict human activities by collected data using devices such as Jawbone Up, Nike FuelBand, and Fitbit. The approach of research is based upon this paper <http://groupware.les.inf.puc-rio.br/har>.
 
 Environment initialization
@@ -60,12 +63,12 @@ predictor <- randomForest(classe ~ ., data = train)
 
 N.B.: for simplicity, single thread code has been provided. It can be run in parallel, using doParallel package (TBD: provide example).
 
-Analysis
+Conclusion
 =============================
 
 ```{r}
 testPred <- predict(predictor, newdata = test)
-accurancy = confusionMatrix(crossValidation$classe, testPred)$overall[1]
+accurancy = confusionMatrix(testPred$classe, testPred)$overall[1]
 ```
 
 So we can conclude that the algorithm's accurancy is equal to 98%.
