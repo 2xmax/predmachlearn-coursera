@@ -27,8 +27,15 @@ train = data[-testIndex,]
 test = data[testIndex,]
 
 predictor <- randomForest(classe ~ ., data = train)
-trainPred <- predict(predictor, newdata = train)
 testPred <- predict(predictor, newdata = test)
 
-confusionMatrix <- confusionMatrix(test$classe, testPred)
-accurancy = confusionMatrix$overall[1]
+accurancy = confusionMatrix(test$classe, testPred)$overall[1]
+
+# ====== Answers part
+if (!file.exists("pml-testing.csv")){
+  download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv", destfile = "pml-testing.csv", method="curl")
+}
+
+ansData = cleanupData(read.csv("pml-testing.csv", na.strings = c("NA",""), stringsAsFactors = FALSE))
+answers <- predict(predictor, newdata = ansData)
+
