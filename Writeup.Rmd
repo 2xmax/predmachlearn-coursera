@@ -64,8 +64,6 @@ For best accurancy without requirement of good interpretaion the best choice wil
 predictor <- randomForest(classe ~ ., data = train)
 ```
 
-N.B.: for simplicity, single thread code has been provided. It can be run in parallel, using doParallel package (TBD: provide example).
-
 Conclusion
 ------------------------------
 
