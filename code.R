@@ -26,7 +26,12 @@ testIndex = createDataPartition(data$classe, p = 0.7, list=FALSE)
 train = data[-testIndex,]
 test = data[testIndex,]
 
+# very slow
+# library(doParallel)
+# registerDoParallel(makeCluster(7))
+# predictor <- train(classe ~ ., data = train, method="rf"), gbm - Stochastic Gradient Boosting, svmRadial - Support Vector Machines
 predictor <- randomForest(classe ~ ., data = train)
+
 testPred <- predict(predictor, newdata = test)
 
 accurancy = confusionMatrix(test$classe, testPred)$overall[1]
