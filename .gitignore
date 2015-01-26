@@ -1,0 +1,23 @@
+Writeup_files
+*.zip
+hw*csv
+*.html
+*.pdf
+
+# History files
+.Rhistory
+.Rapp.history
+.RData
+
+# Example code in package build process
+*-Ex.R
+
+# RStudio files
+*.user
+
+*.csv
+submitscript.R
+.Rproj.user
+
+gen*/
+
