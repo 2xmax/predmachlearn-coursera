@@ -33,7 +33,7 @@ if (!file.exists("pml-training.csv")){
 raw <- read.csv("pml-training.csv", na.strings = c("NA",""), stringsAsFactors = FALSE)
 ```
 
-The original dataset has a lot of noise, let us clean it.
+The original dataset has a lot of noise, let us tidy up.
 ```{r}
 cleanupData = function(raw){
   # remove unrelated fields from model
