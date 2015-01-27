@@ -33,7 +33,7 @@ if (!file.exists("pml-training.csv")){
 raw <- read.csv("pml-training.csv", na.strings = c("NA",""), stringsAsFactors = FALSE)
 ```
 
-The original dataset have a lot of noise, let us clean it.
+The original dataset has a lot of noise, let us clean it.
 ```{r}
 cleanupData = function(raw){
   # remove unrelated fields from model
@@ -59,7 +59,7 @@ test = data[testIndex,]
 
 ```
 
-In order to achieve the best accuracy without requirement of good model interpretaion the best choice will be random forests algorithm (at least among RF, GBM and SVM. Look for [code.R](https://github.com/2xmax/predmachlearn-coursera/blob/master/code.R) for details).
+In order to achieve the best accuracy without requirement of good model interpretation the best choice will be random forests algorithm (at least among RF, GBM and SVM. Look for [code.R](https://github.com/2xmax/predmachlearn-coursera/blob/master/code.R) for details).
 ```{r}
 # predictor <- train(classe ~ ., data = train, method="gbm") # Stochastic Gradient Boosting - 95.99% accuracy rate
 # predictor <- train(classe ~ ., data = train, method="svmRadial") # Support Vector Machines - 88.97% accuracy rate
