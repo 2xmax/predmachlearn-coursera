@@ -28,7 +28,8 @@ test = data[testIndex,]
 
 # library(doParallel)
 # registerDoParallel(makeCluster(7))
-# predictor <- train(classe ~ ., data = train, method="rf"), gbm - Stochastic Gradient Boosting, svmRadial - Support Vector Machines
+# predictor <- train(classe ~ ., data = train, method="gbm") # Stochastic Gradient Boosting
+# predictor <- train(classe ~ ., data = train, method="svmRadial") # Support Vector Machines
 predictor <- randomForest(classe ~ ., data = train)
 
 testPred <- predict(predictor, newdata = test)
@@ -42,4 +43,3 @@ if (!file.exists("pml-testing.csv")){
 
 ansData = cleanupData(read.csv("pml-testing.csv", na.strings = c("NA",""), stringsAsFactors = FALSE))
 answers <- predict(predictor, newdata = ansData)
-
