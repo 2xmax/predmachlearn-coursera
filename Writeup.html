@@ -125,7 +125,7 @@ train = data[-testIndex,]
 test = data[testIndex,]</code></pre>
 <p>In order to achieve the best accuracy without requirement of good model interpretaion the best choice will be random forests algorithm (at least among RF, GBM and SVM. Look for <a href="https://github.com/2xmax/predmachlearn-coursera/blob/master/code.R">code.R</a> for details).</p>
 <pre class="r"><code># predictor &lt;- train(classe ~ ., data = train, method=&quot;gbm&quot;) # Stochastic Gradient Boosting - 95.99 % accuracy rate
-#predictor &lt;- train(classe ~ ., data = train, method=&quot;svmRadial&quot;) # Support Vector Machines - - 88.97% accuracy rate
+# predictor &lt;- train(classe ~ ., data = train, method=&quot;svmRadial&quot;) # Support Vector Machines - - 88.97% accuracy rate
 predictor &lt;- randomForest(classe ~ ., data = train)</code></pre>
 </div>
 <div id="conclusion" class="section level2">

@@ -59,10 +59,10 @@ test = data[testIndex,]
 
 ```
 
-In order to achieve the best accurancy without requirement of good model interpretaion the best choice will be random forests algorithm (at least among RF, GBM and SVM. Look for [code.R](https://github.com/2xmax/predmachlearn-coursera/blob/master/code.R) for details).
+In order to achieve the best accuracy without requirement of good model interpretaion the best choice will be random forests algorithm (at least among RF, GBM and SVM. Look for [code.R](https://github.com/2xmax/predmachlearn-coursera/blob/master/code.R) for details).
 ```{r}
-# predictor <- train(classe ~ ., data = train, method="gbm") # Stochastic Gradient Boosting - 95.99% accurancy rate
-#predictor <- train(classe ~ ., data = train, method="svmRadial") # Support Vector Machines - 88.97% accurancy rate
+# predictor <- train(classe ~ ., data = train, method="gbm") # Stochastic Gradient Boosting - 95.99% accuracy rate
+# predictor <- train(classe ~ ., data = train, method="svmRadial") # Support Vector Machines - 88.97% accuracy rate
 predictor <- randomForest(classe ~ ., data = train)
 ```
 
@@ -71,7 +71,7 @@ Conclusion
 
 ```{r}
 testPred = predict(predictor, newdata = test)
-accurancy = confusionMatrix(test$classe, testPred)$overall[1]
+accuracy = confusionMatrix(test$classe, testPred)$overall[1]
 ```
 
-It can be concluded that the algorithm's accurancy is equal to 98.37% and the out of sample error is 1.63%.
+It can be concluded that the algorithm's accuracy is equal to 98.37% and the out of sample error is 1.63%.
